@@ -1,0 +1,105 @@
+Java ZH (nappali tagozat), 2016.05.17. 16:00-20:00
+Feltételek
+
+A ZH megoldása során tilos más ember segítségét bármilyen módon kérni, vagy vele együttmûködni. Pl. mobiltelefon használata tilos.
+Használható eszközök: írott, nyomtatott anyagok, Internet (keresésre).
+Pendrive-ról, levelezõprogramból a ZH megkezdése elõtt le lehet tölteni tartalmakat, de ezek használata ZH közben tilos.
+Az elkészítendõ megoldásról
+
+A kettesért az alapfeladatot kell megoldani, minden további jegyért egy választható feladatot kell megoldani.
+A választható feladat megoldásához az alapfeladatot kell bõvíteni. Ehhez másold át az alapfeladat megoldását a megfelelõ csomagba (pl. a zh20160517_16.alapfeladat csomagból a zh20160517_16.feladatA csomagba), és alakítsd át/bõvítsd a megoldást a leírás szerint.
+Beadás
+
+Amikor idáig értél az olvasásban, nyisd meg ezt a linket.
+Hajtsd végre az itt szereplõ lépéseket. Ekkor elindul egy program, amely automatikusan beküldi a készülõ megoldás forráskódját.
+A ZH végén a megoldást töltsd is fel a BE-AD rendszerbe.
+Elégséges: kliens-szerver
+Készíts egy egyszerû alkalmazást, amely képes tippelõs játékok lebonyolítására.
+
+Készítsd el a zh20160517_16.alapfeladat.TippSzerver osztályt, amely tartalmazzon fõprogramot.
+
+A TippSzerver kapjon három parancssori paramétert: egy portszámot, egy számot (n) és egy fájlnevet.
+(A program készítése során feltehetõ, hogy az adatok érvényesek és értelmesek, pl. a szám értéke legalább 2, és minden résztvevõ az elvárt módon kommunikál.)
+Amikor a fõprogramja elindul, várjon be n klienst a megadott porton. Ezután kezdje meg az alábbi játékot.
+
+A szerver olvasson fel kérdéseket és válaszokat a megadott nevû fájlból.
+
+Egy sor tartalmazza a kérdést.
+
+A következõ sor tartalmazza a választ, amely egy pozitív egész szám (nagysága szerint belefér az int típusba).
+
+A fájl tetszõlegesen sok ilyen részt tartalmazhat.
+
+Amennyiben egy játék során elfogynak a kérdések, kezdje elölrõl õket.
+
+A szerver küldje el a kérdés szövegét az összes játékban levõ játékosnak.
+
+Mindegyik kliens elküldi egy sorban a szerinte helyes választ (egy-egy egész számot). Ezeket a szerver egymás után fogadja.
+
+A szerver kiszámolja kliensenként, hogy mennyi a helyes válasz és a kapott válasz különbségének abszolútértéke.
+
+Minden körben az a kliens esik ki a játékból, akinek a válasza a legmesszebb esett a helyes választól. Amennyiben egyszerre több ilyen is van, és a kiesésük után még marad aktív játékos, egyszerre több játékos esik ki. A kiesõknek a szerver a "Vesztettel." üzenet küldni és bontja velük a kapcsolatot.
+
+Ha még több, mint egy játékos maradt a kiesés után, a bentmaradó játékosok a "Jatekban maradtal, a tipped helyes/kisebb/nagyobb." üzenetet kapják attól függõen, hogy a tippjük egyenlõ, kisebb vagy nagyobb volt a helyes válasznál. Ezután a játék folytatódik egy újabb kérdéssel.
+
+Ha csak egyetlen játékos maradt, a játékos megkapja a "Gyoztel." üzenetet, a szerver bontja vele a kapcsolatot és leáll.
+
+Ha mindenki válasza egyforma távolságra esett a helyes választól, a játékosok a "Jatekban maradtal, a tipped helyes/kisebb/nagyobb." üzenetet kapják a fentihez hasonlóan, majd a játék folytatódik egy újabb kérdéssel.
+
+Készítsd el a TippKliens fõprogramot, amely kapcsolódjon az elsõ parancssori argumentumában megadott portú szerverhez (a localhoston).
+
+Ha a kliens nem kapott több parancssori paramétert, a sztenderd bemenetrõl vegye az elküldendõ válaszokat.
+
+Ha a kliens kapott parancssori paramétereket (a portszám után), azokat küldje el sorban válaszokként a szervernek.
+
+A kliensnél a standard outputon mindig jelenjen meg a kérdés, valamint a szervertõl kapott visszajelzés is. Gyõzelem és vesztés esetén is szabályosan álljon le a program.
+
+Az alapfeladathoz itt érhetõ el példafájl.
+
+A: Párhuzamosság
+A szerver kódját másold a zh20160517_16.feladatA.TippSzerver osztályba, és alakítsd át úgy, hogy egyszerre több játékmenetet tudjon kezelni párhuzamosan. Amint n darab kliens beérkezik, elindítja a hozzájuk tartozó játékmenetet, és rögtön tud újabb n db kliens csatlakozni a szerverhez. A kérdéseket minden játékmenet esetén ugyanabból a fájlból olvassa, de nem kezdi az olvasást mindig elölrõl, hanem amelyik játékmenetben éppen szükség van egy új kérdésre, a következõ kérdést kapja meg.
+
+B: Távoli metódushívás
+A megoldás fájljait a zh20160517_16.feladatB csomagba készítsd el.
+
+Készíts egy KerdesGyujtemeny típusú távoli objektumot, amelyet a KerdesDeploy nevû fõosztály jegyez be a program belülrõl indított 8888 porton futó registry-be "kerdesek" néven.
+
+A KerdesGyujtemeny kérdés-válasz párokat tárol, és az alábbi távolról hívható metódusokkal rendelkezik:
+
+void feltolt(String file): az adott nevû fájlban lévõ kérdés-válaszokat beolvassa, és eltárolja (a fájl ugyanolyan szerkezetû, mint az 1. feladatban).
+
+void ujKerdesValasz(String kerdes, int valasz): egy új kérdés-válasz párt ad a meglévõkhöz.
+
+String kovetkezoKerdesValasz(): visszaadja, és a saját listájából eltávolítja a soron következõ kérdés-választ párt egyetlen Stringben összefûzve. A kérdést és a választ egy sortörés választja el egymástól.
+
+Az alapfeladatban lévõ szerver kódját másold a zh20160517_16.feladatB.TippSzerver osztályba, és módosítsd a következõképpen:
+
+Indulásakor kapcsolódjon a "kerdesek" néven bejegyzett távoli objektumhoz.
+
+A saját parancssori argumentumában megkapott fájlnévvel hívja meg a távoli objektum feltolt nevû metódusát.
+
+Az új kérdés-választ párokat a továbbiakban már ne a fájlból olvassa, hanem kérje le a távoli objektum kovetkezoKerdesValasz() metódusával.
+
+C: Adatbáziskezelés
+A megoldás fájljait a zh20160517_16.feladatC csomagba készítsd el.
+
+A kliensek jegyezzék meg a kapott kérdéseket és az arra adott tippjeiket a következõképpen.
+
+Ha a kliens sikeresen tippelt, akkor jegyezze meg, hogy ez a helyes válasz, és a következõkben mindig ezt adja erre a kérdésre.
+
+Ha a kliens rossz választ adott, akkor jegyezze meg, hogy mit tippelt, és hogy ez a tipp kisebb vagy nagyobb volt a helyes válasznál. Amint ugyanezt a kérdést kapja újra, akkor közelítsen a helyes eredményhez úgy, hogy az elõzõ tippnél 1-gyel nagyobb/kisebb értéket küld.
+
+Minden esetben, amikor a kapott kérdés még nincs az adatbázisban, az alapfeladatban leírt módon küldje a választ a kliens.
+
+A kliensek technikailag használhatják ugyanazt az adatbázist, de külön táblákkal dolgozzanak.
+
+D: Szerializáció
+A megoldás fájljait a zh20160517_16.feladatD csomagba készítsd el.
+
+A szerver induláskor töltse be a kerdesek.dat fájl tartalmát, ha létezik. Ebbe a fájlba minden játék végén szerializálva kerüljön bele minden olyan tartalom, amely lehetõvé teszi az alábbiakat:
+
+A szerver, amikor a következõ kérdést teszi fel, írja ki a sztenderd kimenetére, hogy Uj kerdes vagy Ismert kerdes, attól függõen, hogy a kerdesek.dat fájlban, vagy az aktuális játék indulása óta szerepelt-e a kérdés.
+
+Ha igen, akkor azt is tárolni kell a kérdés mellé, hogy mi volt az a tipp, ami a legközelebb volt a helyes megoldáshoz. Ez is kerüljön ki a sztenderd kimenetre.
+
+Az adatokat a játék során folyamatosan frissítsük, de a fájlba csak a játék végén kell szerializálva kiírni. (A következõ játék indításakor ezt fogjuk beolvasni). Ha már létezik a fájl, felülírjuk.

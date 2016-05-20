@@ -1,0 +1,7 @@
+alapfeladat: alapvetõen jól összeállt a megoldás, kisebb hibák maradtak:
+- a TippSzerver 52. sorában rossz a zárójelezés: a Math.abs függvénynek a különbségre kellene vonatkoznia
+- ha minden tipp egyforma messze van a megoldástól, minden játékosnak bent kellene maradnia, nálad minden játékos kiesik
+
+feladatA: rendben (az alapfeladat hibája maradt csak benne)
+
+feladatB: rendben, pici hiba: a TippSzerver osztály 111-112. sora az eredeti megoldásból maradt, de itt nincs is rá szükség és NullPointerException-t is okoz, de ezek kikommentezve jól mûködik
